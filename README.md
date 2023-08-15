@@ -9,7 +9,9 @@ Usage
 
 -----
 
-To use the script, provide the path to a CSV containing computer names. Optionally, you can specify filters for the software updates you want to apply.
+To use the script, provide the path to a CSV containing computer names. 
+
+Optionally, you can specify filters for the software updates you want to apply.
 
 Install updates using default settings:
 `Install-PatchesFromCSV -CSVPath "ServersToUpdate.csv"`
