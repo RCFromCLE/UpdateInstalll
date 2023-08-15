@@ -6,53 +6,45 @@ This PowerShell script installs software updates on Windows machines using WMI. 
 #### Note: This script has not been tested. Testing is needed to validate its function.
 
 Usage
-
 -----
 
-To use the script, provide the path to a CSV containing computer names. 
+Before executing any commands, ensure that you navigate to the working directory where the patching script is located. This will ensure the script functions as expected.
 
-Optionally, you can specify filters for the software updates you want to apply.
+To effectively use the script, you will need to supply a path to a CSV file containing the names of the computers you intend to update. Additionally, the script provides the option to fine-tune which software updates are applied based on specific criteria.
 
-Install updates using default settings:
-`Install-PatchesFromCSV -CSVPath "ServersToUpdate.csv"`
+### Navigating to the Script's Directory
 
-Install updates with filters:
-`Install-PatchesFromCSV -CSVPath "ServersToUpdate.csv" -SupName "Security"`
+You can navigate to the script's directory using the `cd` (change directory) command in your PowerShell terminal:
 
-`Install-PatchesFromCSV -CSVPath "ServersToUpdate.csv" -AppEvalState "Available" -SupName "Security"`
+`cd path\to\script\directory`
+
+Replace `path\to\script\directory` with the actual path to the directory containing your script.
+
+### Default Usage
+
+To apply updates using the script's default settings (i.e., without any specific filters), use the following command:
+
+- `Install-PatchesFromCSV -CSVPath "ServersToUpdate.csv"`
+
+### Filtering Updates
+
+You can hone in on specific software updates by specifying filters. Below are some examples demonstrating this:
+
+**Applying updates with a specific keyword in their name** (e.g., "Security"):
+
+ - `Install-PatchesFromCSV -CSVPath "ServersToUpdate.csv" -SupName "Security"`
+
+**Combining multiple filters** (e.g., targeting updates that are "Available" and have "Security" in their name):
+
+   - `Install-PatchesFromCSV -CSVPath "ServersToUpdate.csv" -AppEvalState "Available" -SupName "Security"`
 
 ### CSV Format
 
-The CSV should have a column named `ComputerName` with a list of the computer names:
+Ensure that your CSV file follows the format illustrated below. It should possess a single column named `ComputerName` enumerating the computer names:
 
 `ComputerName
 Computer1
 Computer2
 ...`
 
-Filtering Software Updates
---------------------------
-
-### `$AppEvalState` (appeval)
-
--   **Purpose**: Filters software updates based on their `EvaluationState` property.
-
--   **Description**: The `EvaluationState` often indicates the current status of a software update, such as whether it's available, installed, required, etc.
-
--   **Example**: If you only want to install updates that are in an "Available" state, you'd set:
-
--   `$AppEvalState = "Available"`
-
-    Note: The actual values for `EvaluationState` might differ based on your environment and software. Always consult your system's documentation or output to determine the exact states.
-
-### `$SupName` (upname)
-
--   **Purpose**: Filters software updates based on their `Name` property.
-
--   **Description**: This allows you to target specific updates by looking for keywords or patterns in the update's name.
-
--   **Example**: If you want to install only updates that have the term "Security" in their name, you'd set:
-
-`$SupName = "Security"`
-
-This will target updates like "Security Update for Windows", "Security Patch for XYZ", etc.
+* * * * *
